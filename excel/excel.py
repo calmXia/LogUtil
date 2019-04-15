@@ -76,15 +76,17 @@ class Excel(object):
             else:
                 return col_collections
         '''    
-        
-    def get_index_by_title(self, module=None):
-        print("start to found module -- %s " %(module))
-        for i in self.__title:
-            if self.__title[i] is module:
+
+    def getcol_by_title(self, title=None):
+        print("start to found title -- %s " %(title))
+        for i in range(0,len(self.__title)):
+            print(self.__title[i])
+            if self.__title[i] == title:
+                print("found title -- %s " % title, ", col -- %d" % i)
                 return i
             else:
-                print("not found %s" % (module))
-        
+                print("not found title %s" % (title))
+
     # Gets the specified column
     # Func: table.col_values(colx, start_rowx=0, end_rowx=None)
     # 返回由该列中所有单元格的数据组成的列表
@@ -95,8 +97,10 @@ class Excel(object):
         return self.__table.col_values(col_index, start_rowx, end_rowx)
 
     def getdata_by_module(self, module=None):
-        index = get_index_by_title(module)
-        #start_row = getdata_by_col_index()
+        # NameError: name 'get_index_by_title' is not defined
+        # index = getcol_by_title(self, module)
+        index = self.getcol_by_title("Module")
+        start_row = self.getdata_by_col_index(index, start_rowx=1, end_rowx=self.__nrows-1)
         return 
 
     def seek(seek_name):
